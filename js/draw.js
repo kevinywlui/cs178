@@ -28,7 +28,6 @@ function buttonHandler() {
             polyArray[i]=polyArray[i].replace(/(x|\^)/g,"");
     }
     drawRec(polyArray);
-    drawArrowLine(50,50,50,100,d);
 
 }
 
@@ -37,15 +36,15 @@ function drawRec(polyArray) {
     ctx.font="40px Verdana";
     for(var i=0;i<n;i++) {
         ctx.strokeRect(x+i*100,y,50,50);
-        drawLine(x+50+i*100,y+25,x+100+i*100,y+25);
+        drawRightArrow(x+50+i*100,y+25,x+100+i*100,y+25);
     }
+    var m = polyArray.length;
 }
 
 function drawNum(numString) {
     ctx.font="20px Open Sans";
     ctx.fillStyle = '808080';
     for(var i=0;i<n;i++) 
-
         ctx.fillText(i+1,x+25+i*50,y-10);
 }
 
@@ -64,41 +63,43 @@ function drawLine(x0,y0,x1,y1) {
     ctx.stroke();
 }
 
-function drawArrowLine(x0,y0,x1,y1,D) {
-    var a,b,c,d;
+function drawRightArrow(x0,y0,x1,y1) {
     drawLine(x0,y0,x1,y1);
-    
-    switch(D) {
-        case 'u':
-            a=-5;
-            b=5;
-            c=5;
-            b=5;
-        case 'd':
-            a=-5;
-            b=-5;
-            c=5;
-            d=-5;
-        case 'l':
-            a=5;
-            b=5;
-            c=5;
-            d=-5;
-        case 'r':
-            a=-5;
-            b=-5;
-            c=-5;
-            d=5;
-    }
-        
-
     ctx.moveTo(x1,y1);
-    ctx.beginPath();
-    ctx.lineTo(x1+a,y1+b);
-    ctx.lineTo(x1+c,y1+d);
+    ctx.lineTo(x1-5,y1-5);
+    ctx.lineTo(x1-5,y1+5);
     ctx.lineTo(x1,y1);
-    ctx.fill();
     ctx.stroke();
-    ctx.closePath();
+    ctx.fill();
 }
-        
+
+function drawUpArrow(x0,y0,x1,y1) {
+    drawLine(x0,y0,x1,y1);
+    ctx.moveTo(x1,y1);
+    ctx.lineTo(x1-5,y1+5);
+    ctx.lineTo(x1+5,y1+5);
+    ctx.lineTo(x1,y1);
+    ctx.stroke();
+    ctx.fill();
+}       
+
+  
+function drawDownArrow(x0,y0,x1,y1) {
+    drawLine(x0,y0,x1,y1);
+    ctx.moveTo(x1,y1);
+    ctx.lineTo(x1-5,y1-5);
+    ctx.lineTo(x1+5,y1-5);
+    ctx.lineTo(x1,y1);
+    ctx.stroke();
+    ctx.fill();
+}
+
+function drawLeftArrow(x0,y0,x1,y1) {
+    drawLine(x0,y0,x1,y1);
+    ctx.moveTo(x1,y1);
+    ctx.lineTo(x1+5,y1+5);
+    ctx.lineTo(x1+5,y1-5);
+    ctx.lineTo(x1,y1);
+    ctx.stroke();
+    ctx.fill();
+}
